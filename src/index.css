@@ -5,9 +5,10 @@
 @tailwind utilities;
 
 body {
-     @apply bg-neutral-veryLightGray text-neutral-veryDarkBlueText;
+     @apply bg-neutral-veryLightGray text-neutral-veryDarkBlueText transition-colors duration-500 ease-in-out;
 }
 
 .dark body {
-     @apply bg-neutral-veryDarkBlueBg text-neutral-white
+     @apply bg-neutral-veryDarkBlueBg text-neutral-white transition-colors duration-500 ease-in-out;
+
 }
