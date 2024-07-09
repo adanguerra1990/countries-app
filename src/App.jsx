@@ -5,13 +5,14 @@ import SearchFilter from './components/SearchFilter';
 import CountryCard from './components/CountryCard';
 import axios from 'axios';
 import ShowMoreButtom from './components/ShowMoreButtom';
+import ThemeProvider from './components/ThemeProvider';
 
 function App() {
   const [countries, setCountries] = useState([])
   const [filteredCountries, setFilteredCountries] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
   const [region, setRegion] = useState('')
-  const [visibleCount, setVisibleCount] = useState(8)  
+  const [visibleCount, setVisibleCount] = useState(8)
 
   useEffect(() => {
     axios.get('https://restcountries.com/v3.1/all')
@@ -25,7 +26,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    let filtered = countries    
+    let filtered = countries
 
     if (searchTerm) {
       filtered = filtered.filter(country =>
@@ -47,27 +48,29 @@ function App() {
   }
 
   return (
-    <div>
-      <Header />
-      <main className='px-4 sm:px-6 md:px-8 lg:px-12 mx-auto py-6'>
-        <SearchFilter 
-          onSearch={setSearchTerm}
-          onFilter={setRegion}
-        />
-        <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-          {filteredCountries.slice(0, visibleCount).map(country => (
-            <CountryCard
-              key={country.cca3}
-              country={country}
-            />
-          ))}
-        </section>
-        <ShowMoreButtom 
-          onClick={handleShowMore}
-          isVisible={visibleCount < countries.length}
-        />
-      </main>
-    </div>
+    <ThemeProvider>
+      <div>
+        <Header />
+        <main className='px-4 sm:px-6 md:px-8 lg:px-12 mx-auto py-6'>
+          <SearchFilter
+            onSearch={setSearchTerm}
+            onFilter={setRegion}
+          />
+          <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+            {filteredCountries.slice(0, visibleCount).map(country => (
+              <CountryCard
+                key={country.cca3}
+                country={country}
+              />
+            ))}
+          </section>
+          <ShowMoreButtom
+            onClick={handleShowMore}
+            isVisible={visibleCount < countries.length}
+          />
+        </main>
+      </div>
+    </ThemeProvider>
   )
 }
 
