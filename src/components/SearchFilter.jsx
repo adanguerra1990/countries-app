@@ -4,6 +4,7 @@ import { useState } from "react";
 const SearchFilter = ({ onSearch, onFilter }) => {
      const [filterOpen, setFilterOpen] = useState(false)
      const [searchTerm, setSearchTerm] = useState('')
+     const [seletedRegion, setSelectedRegion] = useState('Filter by Region')
 
      const toggleFilter = () => {
           setFilterOpen(!filterOpen)
@@ -15,7 +16,13 @@ const SearchFilter = ({ onSearch, onFilter }) => {
      }
 
      const handleFilterClick = (region) => {
-          onFilter(region)
+          if (region === 'all') {
+               onFilter('')
+               setSelectedRegion('All')
+          } else {
+               onFilter(region)
+               setSelectedRegion(region)
+          }
           setFilterOpen(false)
      }
      return (
@@ -26,7 +33,7 @@ const SearchFilter = ({ onSearch, onFilter }) => {
                          placeholder="Search for a country..."
                          value={searchTerm}
                          onChange={handleSearchChange}
-                         className="w-full p-2 pl-10 bg-neutral-white dark:bg-neutral-darkGray boreder rounded shadow-sm focus:outline-none dark:text-neutral-white dark:placeholder:text-neutral-white"
+                         className="w-full p-2 pl-10 bg-neutral-white dark:bg-neutral-darkGray boreder rounded shadow-sm focus:outline-none dark:text-neutral-white dark:placeholder:text-neutral-white transition-colors duration-500 ease-in-out"
                     />
                     <RiSearchLine
                          className="absolute left-4 w-4 h-4 text-neutral-darkGray dark:text-neutral-white"
@@ -38,8 +45,8 @@ const SearchFilter = ({ onSearch, onFilter }) => {
                          onClick={toggleFilter}
                          className=" flex justify-between items-center p-2 w-48 bg-neutral-white dark:bg-neutral-darkGray border-none rounded shadow-sm focus:outline-none dark:text-neutral-white"
                     >
-                         Filter by Region
-                         <RiArrowDownSLine className="w-4 h-4  inline-block  text-neutral-darkGray dark:text-neutral-white" />
+                         {seletedRegion}
+                         <RiArrowDownSLine className={`w-4 h-4  inline-block  text-neutral-darkGray dark:text-neutral-white ${filterOpen ? 'rotate-180' : ''}`}/>
                     </button>
                     {filterOpen && (
                          <ul className="absolute md:right-0 mt-2 w-48 bg-neutral-white dark:bg-neutral-darkGray border-none rounded shadow-md">
@@ -48,6 +55,7 @@ const SearchFilter = ({ onSearch, onFilter }) => {
                               <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Asia')}>Asia</li>
                               <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Europe')}>Europe</li>
                               <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Oceania')}>Oceania</li>
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('all')}>All</li>
                          </ul>
                     )}
                </div>
