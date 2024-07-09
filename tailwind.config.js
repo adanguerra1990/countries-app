@@ -3,7 +3,7 @@ const customStyles = require('./customStyles')
 
 /** @type {import('tailwindcss').Config} */
 export default {
-
+  darkMode: 'class', // Habilita el modo oscuro
   content: [
     "index.html",
     "./src/**/*.{js,jsx,ts}"
