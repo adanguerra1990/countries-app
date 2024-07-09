@@ -13,7 +13,8 @@ export default {
       colors: customStyles.colors,
       fontSize: customStyles.fontSize,
       fontFamily: customStyles.fontFamily,
-      fontWeight: customStyles.fontWeight
+      fontWeight: customStyles.fontWeight,
+      boxShadow: customStyles.customShadow
     },
   },
   plugins: [],

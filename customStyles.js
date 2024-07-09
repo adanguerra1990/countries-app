@@ -21,6 +21,9 @@ const customStyles = {
           semiBold: 600,
           bold: 800,
      },
+     customShadow: {
+          boxShadow: '3px 5px 6px 0px rgba(48, 29, 29, 0.5)',
+     }
 }
 
 export default customStyles
