@@ -1,6 +1,6 @@
 const CountryCard = ({ country }) => {
      return (
-          <article className="bg-neutral-white rounded  shadow-md overflow-hidden">
+          <article className="bg-neutral-white dark:bg-neutral-darkBlue rounded  shadow-md overflow-hidden">
                <img
                     src={country.flags.png}
                     alt={`${country.name.common} flag`}

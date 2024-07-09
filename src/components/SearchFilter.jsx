@@ -26,28 +26,28 @@ const SearchFilter = ({ onSearch, onFilter }) => {
                          placeholder="Search for a country..."
                          value={searchTerm}
                          onChange={handleSearchChange}
-                         className="w-full p-2 pl-10 bg-neutral-white boreder rounded shadow-sm focus:outline-none"
+                         className="w-full p-2 pl-10 bg-neutral-white dark:bg-neutral-darkGray boreder rounded shadow-sm focus:outline-none dark:text-neutral-white dark:placeholder:text-neutral-white"
                     />
                     <RiSearchLine
-                         className="absolute left-4 w-4 h-4 text-neutral-darkGray"
+                         className="absolute left-4 w-4 h-4 text-neutral-darkGray dark:text-neutral-white"
                     />
                </div>
 
                <div className="relative">
                     <button
                          onClick={toggleFilter}
-                         className=" flex justify-between items-center p-2 w-48 bg-neutral-white border rounded shadow-sm focus:outline-none"
+                         className=" flex justify-between items-center p-2 w-48 bg-neutral-white dark:bg-neutral-darkGray border-none rounded shadow-sm focus:outline-none dark:text-neutral-white"
                     >
                          Filter by Region
-                         <RiArrowDownSLine className="w-4 h-4  inline-block  text-neutral-darkGray" />
+                         <RiArrowDownSLine className="w-4 h-4  inline-block  text-neutral-darkGray dark:text-neutral-white" />
                     </button>
                     {filterOpen && (
-                         <ul className="absolute right-0 mt-2 w-48 bg-neutral-white border rounded shadow-md">
-                              <li className="p-2 hover:bg-neutral-darkGray cursor-pointer" onClick={() => handleFilterClick('Africa')}>Africa</li>
-                              <li className="p-2 hover:bg-neutral-darkGray cursor-pointer" onClick={() => handleFilterClick('Americas')}>America</li>
-                              <li className="p-2 hover:bg-neutral-darkGray cursor-pointer" onClick={() => handleFilterClick('Asia')}>Asia</li>
-                              <li className="p-2 hover:bg-neutral-darkGray cursor-pointer" onClick={() => handleFilterClick('Europe')}>Europe</li>
-                              <li className="p-2 hover:bg-neutral-darkGray cursor-pointer" onClick={() => handleFilterClick('Oceania')}>Oceania</li>
+                         <ul className="absolute md:right-0 mt-2 w-48 bg-neutral-white dark:bg-neutral-darkGray border-none rounded shadow-md">
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Africa')}>Africa</li>
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Americas')}>America</li>
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Asia')}>Asia</li>
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Europe')}>Europe</li>
+                              <li className="p-2 hover:bg-neutral-darkGray dark:hover:bg-neutral-white dark:hover:text-neutral-veryDarkBlueText cursor-pointer" onClick={() => handleFilterClick('Oceania')}>Oceania</li>
                          </ul>
                     )}
                </div>
