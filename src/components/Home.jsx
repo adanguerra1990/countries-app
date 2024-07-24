@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react"
 import SearchFilter from "./SearchFilter"
-import CountryCard from "./CountryCard"
 import ShowMoreButtom from "./ShowMoreButtom"
 import axios from "axios"
 import Loading from "./Loading"
+import SectionCard from "./SectionCard"
 
 const Home = () => {
      const [countries, setCountries] = useState([])
      const [filteredCountries, setFilteredCountries] = useState([])
      const [searchTerm, setSearchTerm] = useState('')
      const [region, setRegion] = useState('')
-     const [visibleCount, setVisibleCount] = useState(8)
+     const [visibleCountries, setVisibleCountries] = useState(8)
      const [loading, setLoading] = useState(true)
 
      useEffect(() => {
@@ -45,7 +45,7 @@ const Home = () => {
      }, [searchTerm, region, countries])
 
      const handleShowMore = () => {
-          setVisibleCount(prevCount => prevCount + 8)
+          setVisibleCountries(prevCount => prevCount + 8)
      }
 
      if (loading) return <Loading />
@@ -56,17 +56,13 @@ const Home = () => {
                     onSearch={setSearchTerm}
                     onFilter={setRegion}
                />
-               <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
-                    {filteredCountries.slice(0, visibleCount).map(country => (
-                         <CountryCard
-                              key={country.cca3}
-                              country={country}
-                         />
-                    ))}
-               </section>
+               <SectionCard
+                    filteredCountries={filteredCountries}
+                    visibleCountries={visibleCountries}
+               />
                <ShowMoreButtom
                     onClick={handleShowMore}
-                    isVisible={visibleCount < countries.length}
+                    isVisible={visibleCountries < countries.length}
                />
           </div>
      );
