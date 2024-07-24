@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 
 const CountryCard = ({ country }) => {
      return (
-          <Link to={`/country/${country.cca3}`} className="country-card">
+          <Link to={`/country/${country.cca3}`}>
                <article
-                    className="bg-neutral-white dark:bg-neutral-darkBlue rounded  shadow-md overflow-hidden cursor-pointer"
+                    className="country-card"
                >
                     <img
                          src={country.flags.png}
                          alt={`${country.name.common} flag`}
-                         className="w-full h-40 object-cover"
+                         className="country-card__img"
                     />
-                    <div className="p-4">
-                         <h2 className="text-xl font-bold mb-2">
+                    <div className="country-card__content">
+                         <h2 className="country-card__title ">
                               {country.name.common}
                          </h2>
                          <p><strong>Population:</strong> {country.population.toLocaleString()}</p>

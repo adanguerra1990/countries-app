@@ -2,9 +2,9 @@ import { RiLoader4Fill } from '@remixicon/react';
 
 
 const Loading = () => (
-     <div className="flex items-center justify-center h-screen">
+     <div className="loading">
           <RiLoader4Fill
-               className="text-6xl text-neutral-darkBlue dark:text-neutral-white animate-spin "
+               className="loading__icon"
                size={75}
           />
      </div>

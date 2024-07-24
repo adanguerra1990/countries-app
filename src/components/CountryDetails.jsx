@@ -1,7 +1,8 @@
-import { RiArrowLeftLine, RiLoader4Fill } from "@remixicon/react";
+import { RiArrowLeftLine } from "@remixicon/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import Loading from "./Loading";
 
 const CountryDetails = () => {
      const { countryCode } = useParams()
@@ -19,33 +20,24 @@ const CountryDetails = () => {
                })
      }, [countryCode])
 
-     if (!country) {
-          return (
-               <div className="flex items-center justify-center h-screen">
-                    <RiLoader4Fill
-                         className="text-6xl text-neutral-darkBlue dark:text-neutral-white animate-spin "
-                         size={75}
-                    />
-               </div>
-          )
-     }
+     if (!country) return <Loading />
 
      return (
           <>
-               <Link to='/' className="bg-neutral-white dark:bg-neutral-darkGray py-2 px-4 rounded shadow-md mb-10 inline-flex items-center font-bold"><RiArrowLeftLine className="mr-3" /> Back</Link>
-               <article className="flex flex-col items-start md:items-center md:flex-row gap-10">
+               <Link to='/' className="country-details__back-button"><RiArrowLeftLine className="mr-3" /> Back</Link>
+               <article className="country-details">
 
                     <img
                          src={country.flags.png}
                          alt={country.name.common}
-                         className="w-full md:w-1/2 shadow-lg"
+                         className="country-details__flags"
                     />
 
-                    <div className="md:w-1/2">
-                         <h2 className="text-2xl font-bold mb-5">
+                    <div className="country-details__info">
+                         <h2 className="country-details__title">
                               {country.name.common}
                          </h2>
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         <div className="country-details__text-container">
                               <div>
                                    <p>
                                         <strong>Native Name:</strong>
@@ -64,16 +56,16 @@ const CountryDetails = () => {
                               </div>
                          </div>
 
-                         <div className="mt-8 block lg:flex  items-center ">
-                              <h3 className="text-md font-bold lg:mr-3 m-0">Border Countries: </h3>
-                              <div className="flex flex-wrap gap-2">
+                         <div className="country-details__borders">
+                              <h3 className="country-details__borders-title">Border Countries: </h3>
+                              <div className="country-details__borders-buttons">
                                    {country.borders ? country.borders.map(border => {
                                         console.log('border', border)
                                         return (
                                              <Link
                                                   key={border}
                                                   to={`/country/${border}`}
-                                                  className="bg-neutral-white dark:bg-neutral-darkGray px-4 py-2 rounded-md shadow-md"
+                                                  className="country-details__borders-button"
                                              >
                                                   {border}
                                              </Link>

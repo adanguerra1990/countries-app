@@ -11,7 +11,7 @@ function App() {
       <Router>
         <div>
           <Header />
-          <main className='px-4 sm:px-6 md:px-8 lg:px-12 mx-auto py-6'>
+          <main className='main__container'>
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/country/:countryCode' Component={CountryDetails} />
