@@ -7,14 +7,12 @@ import countriesServices from "../services/countriesServices";
 const CountryDetails = () => {
      const { countryCode } = useParams()
      const [country, setCountry] = useState(null)
-     const [bordersCountries, setBordersCountries] = useState([])
-     console.log('bordersCountries', bordersCountries)
+     const [bordersCountries, setBordersCountries] = useState([])     
 
      useEffect(() => {
           countriesServices
                .getByCode(countryCode)
-               .then(data => {
-                    console.log('dataCode', data[0].borders)
+               .then(data => {                    
                     setCountry(data[0])
 
                     if (data[0].borders) {
