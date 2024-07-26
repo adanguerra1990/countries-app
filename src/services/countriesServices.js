@@ -13,7 +13,6 @@ const getByCode = (countryCode) => {
 
 const getByCodes = (codes) => {
      const request = axios.get(`${baseUrl}/alpha?codes=${codes.join(',')}`)
-     console.log(request)
      return request.then(response => response.data)
 }
 
