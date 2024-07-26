@@ -8,11 +8,17 @@ const getAll = () => {
 
 const getByCode = (countryCode) => {
      const request = axios.get(`${baseUrl}/alpha/${countryCode}`)
+     return request.then(response => response.data)
+}
+
+const getByCodes = (codes) => {
+     const request = axios.get(`${baseUrl}/alpha?codes=${codes.join(',')}`)
      console.log(request)
      return request.then(response => response.data)
 }
 
 export default {
      getAll,
-     getByCode
+     getByCode,
+     getByCodes
 }
