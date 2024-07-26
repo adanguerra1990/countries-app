@@ -1,22 +1,31 @@
 import { RiArrowLeftLine } from "@remixicon/react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "./Loading";
+import countriesServices from "../services/countriesServices";
 
 const CountryDetails = () => {
      const { countryCode } = useParams()
      const [country, setCountry] = useState(null)
-
-     console.log('useParams', countryCode)
+     const [bordersCountries, setBordersCountries] = useState([])
+     console.log('bordersCountries', bordersCountries)
 
      useEffect(() => {
-          axios.get(`https://restcountries.com/v3.1/alpha/${countryCode}`)
-               .then(response => {
-                    setCountry(response.data[0])
+          countriesServices
+               .getByCode(countryCode)
+               .then(data => {
+                    console.log('dataCode', data[0].borders)
+                    setCountry(data[0])
+
+                    if (data[0].borders) {
+                         return countriesServices
+                                   .getByCodes(data[0].borders)
+                    } else {
+                         return []
+                    }
                })
-               .catch(error => {
-                    console.log('error fetching country details:', error)
+               .then(borderData => {
+                    setBordersCountries(borderData)
                })
      }, [countryCode])
 
@@ -59,15 +68,14 @@ const CountryDetails = () => {
                          <div className="country-details__borders">
                               <h3 className="country-details__borders-title">Border Countries: </h3>
                               <div className="country-details__borders-buttons">
-                                   {country.borders ? country.borders.map(border => {
-                                        console.log('border', border)
+                                   {bordersCountries.length > 0 ? bordersCountries.map(borderCountry => {
                                         return (
                                              <Link
-                                                  key={border}
-                                                  to={`/country/${border}`}
+                                                  key={borderCountry.cca3}
+                                                  to={`/country/${borderCountry.cca3}`}
                                                   className="country-details__borders-button"
                                              >
-                                                  {border}
+                                                  {borderCountry.name.common}
                                              </Link>
                                         )
                                    }) : 'None'}

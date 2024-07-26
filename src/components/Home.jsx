@@ -4,6 +4,7 @@ import ShowMoreButtom from "./ShowMoreButtom"
 import axios from "axios"
 import Loading from "./Loading"
 import SectionCard from "./SectionCard"
+import countriesServices from "../services/countriesServices"
 
 const Home = () => {
      const [countries, setCountries] = useState([])
@@ -14,14 +15,11 @@ const Home = () => {
      const [loading, setLoading] = useState(true)
 
      useEffect(() => {
-          axios.get('https://restcountries.com/v3.1/all')
-               .then(respose => {
-                    setCountries(respose.data)
-                    setFilteredCountries(respose.data)
-                    setLoading(false)
-               })
-               .catch(error => {
-                    console.log('error feetching countries:', error)
+          countriesServices
+               .getAll()
+               .then(data => {
+                    setCountries(data)
+                    setFilteredCountries(data)
                     setLoading(false)
                })
      }, [])
